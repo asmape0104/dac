@@ -26,7 +26,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
       return true;
     case 'watchdata':
-      fetch(`https://www.nicovideo.jp/watch/${request.contentId}`)
+      fetch(`https://www.nicovideo.jp/watch/${request.contentId}`, {
+        credentials: 'omit'
+      })
             .then(res => res.text())
             .then(html => {
               const matchArr = html.match(/id="js-initial-watch-data" data-api-data="([^"]+)"/);
